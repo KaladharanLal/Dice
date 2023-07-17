@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice</title>
+    <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body
+        {
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            background:#000000;
+            overflow: hidden;
+        }
+        #dice
+        {
+            position: absolute;
+            left: 50%;
+            bottom: 50%;
+            width: 50vh;
+            height: 50vh;
+            background: rgb(209, 208, 208);
+            transform: translateX(-50%) translateY(50%);
+            border-radius: 10vh;
+            justify-content:center;
+            align-items: center;
+            font-size: 20vh;
+        }
+        .rotate
+        {
+            animation: rotate .2s ease-in-out;
+        }
+        @keyframes rotate {
+            0%
+            {
+                color: rgb(209, 208, 208);
+                transform: translateX(-50%) translateY(50%) rotate(0deg);
+            }
+            100%
+            {
+                transform: translateX(-50%) translateY(50%) rotate(365deg);
+                color: #050505;
+            }
+        }
+        #ui
+        {
+            position: absolute;
+            left: 50%;
+            bottom: 10px;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 50px;
+        }
+        .bt
+        {
+            position: absolute;
+            height: 50px;
+            width: 50px;
+            left: 0;
+            bottom: 0;
+            font-size: larger;
+            border-radius: 20px;
+            text-align: center;
+        }
+        .bt2
+        {
+            left: 66%;
+        }
+        #input
+        {
+            position: absolute;
+            height: 50px;
+            width: 50px;
+            left: 33%;
+            bottom: 0;
+            font-size: larger;
+            border-radius: 20px;
+            text-align: center;
+        }
+        .textDisable
+        {
+            /* Disable text selection: https://stackoverflow.com/questions/826782/how-to-disable-text-selection-highlighting */
+            -webkit-touch-callout: none; /* iOS Safari */
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Old versions of Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Chrome, Opera and Firefox */
+        }
+    </style>
+</head>
+<body>
+    <button id="dice" onclick="roll()">1</button>
+    <div id="ui">
+        <button class="bt textDisable" onclick="dec()">&lt;</button>
+        <input type="text" class="textDisable" id="input" value="6">
+        <button class="bt bt2 textDisable" onclick="inc()">&gt;</button>
+    <script>
+        let dices = document.getElementById("dice");
+        let input = document.getElementById("input");
+        var noDices = 1;
+        var rollNo = [];
+
+        function roll()
+        {
+            dices.innerHTML = parseInt(Math.random() * input.value, 10)+1;
+            dices.classList.add("rotate");
+            setTimeout(rmRot, 200);
+        }
+
+        function rmRot()
+        {
+            dices.classList.remove("rotate");
+        }
+
+        function inc()
+        {
+            input.value ++
+        }
+
+        function dec()
+        {
+            input.value --
+        }
+    </script>
+</body>
+</html>
